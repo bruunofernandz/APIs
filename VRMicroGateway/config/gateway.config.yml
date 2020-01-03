@@ -1,0 +1,350 @@
+http:
+  port: 9000
+apiEndpoints:
+  # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  agenda-fornecedor-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/agendaFornecedor/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  compra-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/compra/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  consistencia-pdv-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/consistenciaPDV/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  cupom-medio-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/cupomMedio/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  estoque-online-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/estoqueOnline/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  loja-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/loja/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  nf-entrada-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/nfEntrada/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  nf-saida-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/nfSaida/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  usuario-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/usuario/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  venda-pdv-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/vendapdv/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  venda-periodo-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/vendaPeriodo/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  consumo-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/consumo/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  perda-quebra-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/perdaQuebra/*"
+    methods: ["POST", "GET", "OPTIONS"]
+  estoque-api:
+    host: "*"
+    paths: "/api/v1/vrmasterserver/estoque/*"
+    methods: ["POST", "GET", "OPTIONS"]
+serviceEndpoints:
+  # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
+  agenda-fornecedor-svc:
+    url: "http://127.0.0.1:9100"
+  compra-svc:
+    url: "http://127.0.0.1:9101"
+  consistencia-pdv-svc:
+    url: "http://127.0.0.1:9102"
+  cupom-medio-svc:
+    url: "http://127.0.0.1:9103"
+  estoque-online-svc:
+    url: "http://127.0.0.1:9104"
+  loja-svc:
+    url: "http://127.0.0.1:9105"
+  nf-entrada-svc:
+    url: "http://127.0.0.1:9106"
+  nf-saida-svc:
+    url: "http://127.0.0.1:9107"
+  usuario-svc:
+    url: "http://127.0.0.1:9108"
+  venda-pdv-svc:
+    url: "http://127.0.0.1:9109"
+  venda-periodo-svc:
+    url: "http://127.0.0.1:9110"
+  consumo-svc:
+    url: "http://127.0.0.1:9111"
+  perda-quebra-svc:
+    url: "http://127.0.0.1:9112"
+  estoque-svc:
+    url: "http://127.0.0.1:9113"
+policies:
+  - cors
+  - log
+  - proxy
+pipelines:
+  # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  pipeline_1:
+    apiEndpoints:
+      - agenda-fornecedor-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: agenda-fornecedor-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+# see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  pipeline_2:
+    apiEndpoints:
+      - compra-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: compra-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_3:
+    apiEndpoints:
+      - consistencia-pdv-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: consistencia-pdv-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_4:
+    apiEndpoints:
+      - cupom-medio-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: cupom-medio-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_5:
+    apiEndpoints:
+      - estoque-online-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: estoque-online-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_6:
+    apiEndpoints:
+      - loja-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: loja-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_7:
+    apiEndpoints:
+      - nf-entrada-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: nf-entrada-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_8:
+    apiEndpoints:
+      - nf-saida-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: nf-saida-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_9:
+    apiEndpoints:
+      - usuario-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: usuario-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_10:
+    apiEndpoints:
+      - venda-pdv-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: venda-pdv-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_11:
+    apiEndpoints:
+      - venda-periodo-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: venda-periodo-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_12:
+    apiEndpoints:
+      - consumo-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: consumo-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_13:
+    apiEndpoints:
+      - perda-quebra-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: perda-quebra-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  pipeline_14:
+    apiEndpoints:
+      - estoque-api
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "OPTIONS,GET,POST"
+              credentials: false
+              exposedHeaders: ["authorization", "Authorization"]
+              allowedHeaders: ["Content-Type","Authorization","Accept"]
+      - proxy:
+          - action:
+              serviceEndpoint: estoque-svc
+              changeOrigin: true
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}  
