@@ -9,17 +9,9 @@ exports.getConsistenciaPDV = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryConsistencia = " SELECT value FROM consistenciapdv WHERE 1 = 1";
-
-  /*
-    Completa a query com os campos passados no body
-     */
+  let queryConsistencia = " SELECT value FROM dados WHERE 1 = 1";
 
   queryConsistencia += FiltrarCampos(req.headers);
-
-  /* 
-    Faz a requisição no bd e retorna a resposta em json para o client
-    */
 
   await consistenciaPDV.sequelize
     .query(queryConsistencia)
@@ -38,6 +30,6 @@ exports.getConsistenciaPDV = async (req, res) => {
 function FiltrarCampos(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += " AND id = " + filtros.hash;
+  filtrosAnd += " AND id_cliente = " + filtros.hash;
   return filtrosAnd;
 }

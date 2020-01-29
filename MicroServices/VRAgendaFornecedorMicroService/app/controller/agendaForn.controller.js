@@ -9,10 +9,10 @@ exports.getAgendaFornecedor = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryAgenda = "SELECT value FROM agendafornecedor WHERE 1 = 1 ";
+  let queryAgenda = "SELECT value FROM dados WHERE 1 = 1 ";
 
   queryAgenda += FiltrarCampos(req.headers);
-  console.log(req.body);
+  console.log(req.headers);
 
   agendaFornecedor.sequelize
     .query(queryAgenda)
@@ -21,19 +21,19 @@ exports.getAgendaFornecedor = async (req, res) => {
 
       res.send(lista[0].value);
 
-      console.log(lista[0].value);
+      console.log("Lista[0].value => " + lista[0].value);
       
     })
     .catch(err => {
-      res.status(500).json({ success: false, error: err });
+      res.status(500).json({ success: false, error: `${err}` });
     });
 };
 
 function FiltrarCampos(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += "AND id = " + filtros.hash;
-  console.log(filtrosAnd.hash);
+  filtrosAnd += "AND id_cliente = " + filtros.hash;
+  console.log("Hash: " + filtros.hash);
 
   return filtrosAnd;
 }

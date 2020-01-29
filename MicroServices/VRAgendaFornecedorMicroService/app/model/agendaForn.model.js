@@ -1,7 +1,5 @@
 module.exports = (sequelize) => {
-    const Agenda = sequelize.define('agendafornecedor', {
-        schema: 'public',
-    });
+  const Agenda = sequelize.define("dados", { schema: "public" });
 
-    return Agenda;
-}
+  return Agenda;
+};

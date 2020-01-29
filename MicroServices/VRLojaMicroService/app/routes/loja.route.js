@@ -5,8 +5,5 @@ module.exports = function(app) {
 
   let rotaPadraoLojaV1 = "/api/v1/vrmasterserver/loja";
 
-  /**
-   * Route loja
-   */
-  app.get(`${rotaPadraoLojaV1}/find`, loja.getLoja);
+  app.get(`${rotaPadraoLojaV1}/get`, loja.getLoja);
 };
