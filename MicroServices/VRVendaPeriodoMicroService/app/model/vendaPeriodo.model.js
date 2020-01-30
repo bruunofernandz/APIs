@@ -1,5 +1,5 @@
-module.exports = (sequelize, Sequelize) => {
-    const Loja = sequelize.define('loja', {
+module.exports = (sequelize) => {
+    const Loja = sequelize.define('dados', {
         schema: 'public'
     })
     return Loja

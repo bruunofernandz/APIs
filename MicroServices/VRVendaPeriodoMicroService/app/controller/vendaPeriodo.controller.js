@@ -9,7 +9,7 @@ exports.getVendaPeriodo = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryLoja = " SELECT value FROM vendaperiodo WHERE 1 = 1";
+  let queryLoja = " SELECT value FROM dados WHERE 1 = 1";
 
   queryLoja += FiltrarCampos(req.headers);
 
@@ -30,6 +30,6 @@ exports.getVendaPeriodo = async (req, res) => {
 function FiltrarCampos(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += " AND id = " + filtros.hash;
+  filtrosAnd += " AND id_cliente = " + filtros.hash;
   return filtrosAnd;
 }

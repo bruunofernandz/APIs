@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
   const data = sequelize.define(
-    "perdaquebra",
+    "dados",
     {
-      id: {
+      id_cliente: {
         type: Sequelize.INTEGER,
         primaryKey: true
       },
       valor: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
         allowNull: false
       }
     },
