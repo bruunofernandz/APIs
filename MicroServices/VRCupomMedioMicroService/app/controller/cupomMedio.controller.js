@@ -10,7 +10,7 @@ exports.getCupomMedio = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryCupomMedio = " SELECT value FROM cupommedio WHERE 1 = 1 ";
+  let queryCupomMedio = " SELECT value FROM dados WHERE 1 = 1 ";
 
   queryCupomMedio += FiltrarCampos(req.headers);
 
@@ -30,6 +30,6 @@ exports.getCupomMedio = async (req, res) => {
 function FiltrarCampos(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += ` AND id = ${filtros.hash} `;
+  filtrosAnd += ` AND id_cliente = ${filtros.hash} `;
   return filtrosAnd;
 }

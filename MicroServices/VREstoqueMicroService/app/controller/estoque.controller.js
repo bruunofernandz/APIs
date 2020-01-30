@@ -20,11 +20,13 @@ exports.findEstoque = async (req, res, next) => {
   } catch (err) {
     return res.status(500).json({ success: false, error: `${err}` });
   }
+
+  next();
 };
 
 findEstoque = async hashClient => {
   return await estoque
-    .findAll({ attributes: ["valor"], where: { id: hashClient.hash } })
+    .findAll({ attributes: ["value"], where: { id: hashClient.hash } })
     .then(finded => {
       console.log("Finded");
       return finded;
