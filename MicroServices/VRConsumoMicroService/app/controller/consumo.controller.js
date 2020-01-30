@@ -27,7 +27,7 @@ exports.findConsumo = async (req, res, next) => {
 findConsumo = async hashClient => {
   return await consumo
     .findAll(
-      { attributes: ["valor"], where: { id: hashClient.hash }})
+      { attributes: ["value"], where: { id: hashClient.hash }})
     .then(finded => {
       console.log("Finded !");
       return finded;

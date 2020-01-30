@@ -9,7 +9,7 @@ exports.getUsuario = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryUsuario = "SELECT value FROM usuario WHERE 1=1";
+  let queryUsuario = "SELECT value FROM dados WHERE 1=1";
 
   queryUsuario += FiltrarCampos(req.headers);
 
@@ -30,6 +30,6 @@ exports.getUsuario = async (req, res) => {
 function FiltrarCampos(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += " AND id = " + filtros.hash;
+  filtrosAnd += " AND id_cliente = " + filtros.hash;
   return filtrosAnd;
 }

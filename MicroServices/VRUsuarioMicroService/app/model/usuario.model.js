@@ -1,5 +1,5 @@
-module.exports = (sequelize, Sequelize) => {
-  const Usuario = sequelize.define('usuario', {
+module.exports = (sequelize) => {
+  const Usuario = sequelize.define('dados', {
     schema: 'public'
   });
   
