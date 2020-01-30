@@ -1,42 +1,46 @@
-const Sequelize = require('sequelize')
+const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
-    process.env.DB_DATABASE,
-    process.env.DB_USERNAME,
-    process.env.DB_PASSWORD, {
-
+  process.env.DB_DATABASE,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
     host: process.env.DB_HOST,
-    dialect: "postgres",
+    dialect: process.env.DB_DIALECT,
     timestamp: false,
     port: process.env.DB_PORT,
     define: {
-        timestamp: false,
-        freezeTableName: true
+      timestamp: false,
+      freezeTableName: true
     },
 
     pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000,
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
     }
-});
+  }
+);
 
-sequelize.authenticate().then(() => {
-    console.log("DB connection sucessful")
-}).catch(error => {
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("DB connection sucessful");
+  })
+  .catch(error => {
     setTimeout(() => {
-        process.kill(process.pid, "SIGTERM")
-    }, 300)
-    return Promise.reject("Error ao conectar com o banco de dados")
-});
+      process.kill(process.pid, "SIGTERM");
+    }, 300);
+    return Promise.reject("Error ao conectar com o banco de dados");
+  });
 
-const db = {}
+const db = {};
 
-db.Sequelize = Sequelize
-db.sequelize = sequelize
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
 //Models/tables - produto
 
-db.compra = require('../model/compra.model')(sequelize, Sequelize)
+db.compra = require("../model/compra.model")(sequelize, Sequelize);
 
-module.exports = db
+module.exports = db;

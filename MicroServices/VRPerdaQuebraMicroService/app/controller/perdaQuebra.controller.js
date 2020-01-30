@@ -26,7 +26,7 @@ exports.findPerdaQuebra = async (req, res, next) => {
 
 findPerdaQuebra = async hashClient => {
   return await perdaQuebra.findAll({
-      attributes: ["valor"],
+      attributes: ["value"],
       where: { id: hashClient.hash }
     })
     .then(finded => {

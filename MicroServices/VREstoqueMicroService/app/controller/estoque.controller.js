@@ -4,7 +4,7 @@ const handlers = require("../error/error-handlers");
 
 const estoque = db.estoque;
 
-exports.findEstoque = async (req, res, next) => {
+exports.findEstoque = async (req, res) => {
   const { error } = bodyValidation(req.headers);
 
   if (error) return handlers.onError(res, error.details[0].message);
@@ -20,8 +20,6 @@ exports.findEstoque = async (req, res, next) => {
   } catch (err) {
     return res.status(500).json({ success: false, error: `${err}` });
   }
-
-  next();
 };
 
 findEstoque = async hashClient => {

@@ -5,19 +5,19 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    port: 5432,
-    timestamps: false,
-    dialect: "postgres",
+    dialect: process.env.DB_DIALECT,
+    timestamp: false,
+    port: process.env.DB_PORT,
     define: {
-      timestamps: true,
+      timestamp: false,
       freezeTableName: true
     },
 
     pool: {
-      min: 0,
       max: 5,
+      min: 0,
       acquire: 30000,
-      iddle: 10000
+      idle: 10000
     }
   }
 );
@@ -27,20 +27,23 @@ sequelize
   .then(() => {
     console.log("DB connection sucessful");
   })
-  .catch(err => {
+  .catch(() => {
     setTimeout(() => {
       process.kill(process.pid, "SIGTERM");
-    });
+    }, 300);
     return Promise.reject(
       "Error ao conectar com o banco de dados: " + process.env.DB_HOST
     );
   });
 
-let db = {};
+const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.estoque = require("../model/estoque.model")(sequelize, Sequelize);
+db.estoque = require("../model/estoque.model")(
+  sequelize,
+  Sequelize
+);
 
 module.exports = db;

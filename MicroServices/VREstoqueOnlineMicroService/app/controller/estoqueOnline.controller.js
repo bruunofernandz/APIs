@@ -9,7 +9,7 @@ exports.getEstoqueOnline = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryEstoqueOnline = " SELECT value FROM estoqueonline WHERE 1 = 1 ";
+  let queryEstoqueOnline = " SELECT value FROM dados WHERE 1 = 1 ";
 
   queryEstoqueOnline += FiltrarCampo(req.headers);
 
@@ -30,7 +30,7 @@ exports.getEstoqueOnline = async (req, res) => {
 function FiltrarCampo(filtros) {
     let filtrosAnd = '';
 
-    filtrosAnd += ` AND id = ${filtros.hash} `;
+    filtrosAnd += ` AND id_cliente = ${filtros.hash} `;
 
     return filtrosAnd;
 }

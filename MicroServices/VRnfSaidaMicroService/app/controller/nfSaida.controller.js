@@ -9,7 +9,7 @@ exports.getnfSaida = async (req, res) => {
 
   if (error) return handlers.onError(res, error.details[0].message);
 
-  let queryNfSaida = " SELECT value FROM nfsaida WHERE 1 = 1 ";
+  let queryNfSaida = " SELECT value FROM dados WHERE 1 = 1 ";
 
   queryNfSaida += FiltrarCampo(req.headers);
 
@@ -30,7 +30,7 @@ exports.getnfSaida = async (req, res) => {
 function FiltrarCampo(filtros) {
   let filtrosAnd = "";
 
-  filtrosAnd += " AND id = " + filtros.hash;
+  filtrosAnd += " AND id_cliente = " + filtros.hash;
 
   return filtrosAnd;
 }
